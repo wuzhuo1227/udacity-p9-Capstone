@@ -8,6 +8,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageColor
 
+# Pre-trained model trained using COCO dataset
 SSD_GRAPH_FILE = 'model/frozen_inference_graph.pb'
 TARGET_CLASS = 10  ## traffic light 
 OBJECT_DETECTED_IMAGE = 'obj_det.png'
@@ -118,6 +119,7 @@ class TLClassifier(object):
 
             confidence_cutoff = 0.2
             # Filter boxes with a confidence score less than `confidence_cutoff`
+            # And belongs to TARGET_CLASS
             boxes, scores, classes = filter_boxes(confidence_cutoff, TARGET_CLASS, boxes, scores, classes)
 
             if len(boxes) > 0:
@@ -143,8 +145,7 @@ class TLClassifier(object):
                         lower = np.array(lower, dtype = "uint8")
                         upper = np.array(upper, dtype = "uint8")
 
-                        # find the colors within the specified boundaries and apply
-                        # the mask
+                        # find the colors within the specified boundaries and apply the mask
                         mask[j] = sum(np.hstack(cv2.inRange(hsv, lower, upper)))
 
                     ryg[mask.index(max(mask))] += 1 
