@@ -5,7 +5,9 @@ I only modified the code in the five files `waypoint_updater.py`, `dbw_node.py`,
 
 ### Name & Email
 name: Zhuo Wu
+
 email: zhuowu9605@gmail.com
+
 
 Please use **one** of the two installation options, either native **or** docker installation.
 
